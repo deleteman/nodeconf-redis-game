@@ -1,0 +1,7 @@
+{
+	"server": {
+		"defaults": {
+			"port": "9090"
+		}
+	}
+}
