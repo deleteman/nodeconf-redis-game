@@ -1,9 +1,24 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express'),
+ 	  router = express.Router();
 
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+
+let Server = null;
+let LOGGER = null;
+
+router.post('/', function(req, res, next) {
+	LOGGER.info("POST RECEIVED FROM USER: " + req.body.username);
+	Server.receiveHit(req.body, (err) => {
+		if(err) return res.json(err);
+		res.json({ result: 'OK'});
+	});
 });
 
-module.exports = router;
+router.get('/ranking', function(req, res, next) {
+	LOGGER.info("GETTING RANKING");
+	res.json(Server.localRanking);
+})
+module.exports = (logger, server) => {
+	Server = server;
+	LOGGER = logger;
+	return router;
+};

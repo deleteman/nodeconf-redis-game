@@ -1,18 +1,32 @@
 const express = require('express'),
 	config = require("config"),
+	gameServer = require("./lib/server"),
+	bodyParser = require('body-parser')
 	logger = require('./lib/logger');
 
-const index = require('./routes/index');
 
 const app = express();
 
+const Server = new gameServer(logger);
+
+
+Server.connect(() => {
+	logger.info("Game server online and connected!")
+});
+
+const index = require('./routes/index')(logger, Server);
+
 let PORT = process.argv[2];
+
 if(!PORT) {
 	logger.error("No port specified on the command line, so using default port instead");
 	PORT = config.get('server.defaults.port');
 }
 
+app.use(bodyParser.json());
+
 app.use('/', index);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -23,15 +37,11 @@ app.use(function(req, res, next) {
 
 // error handler
 app.use(function(err, req, res, next) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
-
   // render the error page
   res.status(err.status || 500);
-  res.render('error');
-});
+  res.json(err);
 
+});
 
 app.listen(PORT, () => {
 	logger.info("Server up and running on port ", PORT);
