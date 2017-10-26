@@ -3,7 +3,10 @@
 		"defaults": {
 			"port": "9090",
 			"defaultTimeout": 60
-
 		}
+	},
+	"userHits": {
+		"defaultTTL": 1,
+		"defaultLockTTL": 1
 	}
 }
