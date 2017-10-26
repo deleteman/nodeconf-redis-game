@@ -1,6 +1,6 @@
 const express = require('express'),
 	config = require("config"),
-	gameServer = require("./lib/server"),
+	gameServer = require("./lib/servernode"),
 	bodyParser = require('body-parser')
 	logger = require('./lib/logger');
 
@@ -10,7 +10,7 @@ const app = express();
 const Server = new gameServer(logger);
 
 
-Server.connect(() => {
+Server.init(() => {
 	logger.info("Game server online and connected!")
 });
 

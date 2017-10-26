@@ -15,7 +15,7 @@ router.post('/', function(req, res, next) {
 
 router.get('/ranking', function(req, res, next) {
 	LOGGER.info("GETTING RANKING");
-		res.json(Server.localRanking);
+	res.json(Server.getRanking());
 })
 module.exports = (logger, server) => {
 	Server = server;
