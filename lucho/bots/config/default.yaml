@@ -1,0 +1,7 @@
+server:
+  host: "localhost"
+  port: 8080
+
+bots:
+  userCount: 1000000
+  maxErrors: 400

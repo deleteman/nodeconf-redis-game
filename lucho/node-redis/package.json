@@ -1,0 +1,11 @@
+{
+  "name": "node-redis-test",
+  "version": "0.0.1",
+  "author": "luciano@iamat.com",
+  "dependencies": {
+    "express": "^4.16.2",
+    "redis": "^2.8.0",
+    "request": "^2.83.0"
+  },
+  "private": true
+}

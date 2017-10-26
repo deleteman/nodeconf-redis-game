@@ -1,0 +1,4 @@
+{
+    "maxRequests": 50000,
+    "maxUsers": 10000
+}
